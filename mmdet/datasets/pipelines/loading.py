@@ -249,7 +249,8 @@ class LoadAnnotations:
 
         # change by hui
         for keys, new_key in [(["bboxes_ignore"], "gt_bboxes_ignore"),
-                              (["true_bboxes", "bboxes"], "gt_true_bboxes")]:
+                             # (["true_bboxes", "bboxes"], "gt_true_bboxes")]:
+                              (["true_bboxes", "bboxes"])]:
             for key in keys:
                 data = ann_info.get(key, None)
                 if data is not None:
