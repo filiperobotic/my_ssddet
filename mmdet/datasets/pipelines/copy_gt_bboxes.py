@@ -1,3 +1,6 @@
+from mmdet.datasets.builder import PIPELINES
+
+@PIPELINES.register_module()
 class CopyGTBBoxesAsTrueBBoxes:
     def __call__(self, results):
         # Copia gt_bboxes para gt_true_bboxes
