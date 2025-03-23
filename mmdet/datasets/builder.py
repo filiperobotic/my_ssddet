@@ -154,8 +154,8 @@ def build_dataloader(dataset,
         batch_size=batch_size,
         sampler=sampler,
         num_workers=num_workers,
-        # collate_fn=partial(collate, samples_per_gpu=samples_per_gpu),
-        collate_fn=custom_collate_fn,  #FILIPE CODE
+        collate_fn=partial(collate, samples_per_gpu=samples_per_gpu),
+        # collate_fn=custom_collate_fn,  #FILIPE CODE
         pin_memory=False,
         worker_init_fn=init_fn,
         **kwargs)
