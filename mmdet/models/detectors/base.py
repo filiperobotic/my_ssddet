@@ -107,7 +107,7 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
             for key in kwargs:  # modified by hui
                 if key in ['proposals'] or key.startswith('gt_'):
                     kwargs[key] = kwargs[key][0]
-            return await self.async_simple_test(img[0], img_metas[0], **kwargs)
+            return await self. async_simple_test(img[0], img_metas[0], **kwargs)
         else:
             raise NotImplementedError
 
