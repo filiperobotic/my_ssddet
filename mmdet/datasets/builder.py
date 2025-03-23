@@ -73,6 +73,23 @@ def build_dataset(cfg, default_args=None):
 
     return dataset
 
+#FILIPE CODE
+def custom_collate_fn(batch):
+    from collections import defaultdict
+    from torch.utils.data._utils.collate import default_collate
+
+    elem = batch[0]
+    if isinstance(elem, dict):
+        out = {}
+        for key in elem:
+            try:
+                out[key] = default_collate([d[key] for d in batch])
+            except:
+                out[key] = [d[key] for d in batch]
+        return out
+    else:
+        return default_collate(batch)
+
 
 def build_dataloader(dataset,
                      samples_per_gpu,
@@ -128,7 +145,8 @@ def build_dataloader(dataset,
         batch_size=batch_size,
         sampler=sampler,
         num_workers=num_workers,
-        collate_fn=partial(collate, samples_per_gpu=samples_per_gpu),
+        # collate_fn=partial(collate, samples_per_gpu=samples_per_gpu),
+        collate_fn=custom_collate_fn,  #FILIPE CODE
         pin_memory=False,
         worker_init_fn=init_fn,
         **kwargs)
