@@ -75,7 +75,7 @@ def build_dataset(cfg, default_args=None):
 
 #FILIPE CODE
 def custom_collate_fn(batch):
-    from collections import defaultdict
+    import torch
     from torch.utils.data._utils.collate import default_collate
 
     elem = batch[0]
@@ -83,12 +83,8 @@ def custom_collate_fn(batch):
         out = {}
         for key in elem:
             try:
-                if key == 'img':
-                    # img precisa ser empilhado como Tensor [B, C, H, W]
-                    out[key] = torch.stack([d[key] for d in batch])
-                else:
-                    out[key] = default_collate([d[key] for d in batch])
-            except:
+                out[key] = default_collate([d[key] for d in batch])
+            except Exception:
                 out[key] = [d[key] for d in batch]
         return out
     else:
