@@ -77,16 +77,25 @@ def build_dataset(cfg, default_args=None):
 def custom_collate_fn(batch):
     import torch
     from torch.utils.data._utils.collate import default_collate
+    from mmcv.parallel import DataContainer
 
     if isinstance(batch[0], dict):
         output = {}
         for key in batch[0]:
             values = [d[key] for d in batch]
-            # Somente o campo 'img' precisa ser empilhado
-            if key == 'img':
-                output[key] = torch.stack(values, dim=0)  # [B, C, H, W]
+
+            if isinstance(values[0], DataContainer):
+                if key == 'img':
+                    # img → empilha os tensores internos
+                    output[key] = torch.stack([v.data for v in values], dim=0)
+                else:
+                    # outros campos → lista de DataContainer
+                    output[key] = values
             else:
-                output[key] = values  # Deixa o resto como lista
+                try:
+                    output[key] = default_collate(values)
+                except:
+                    output[key] = values
         return output
     else:
         return default_collate(batch)
