@@ -83,7 +83,11 @@ def custom_collate_fn(batch):
         out = {}
         for key in elem:
             try:
-                out[key] = default_collate([d[key] for d in batch])
+                if key == 'img':
+                    # img precisa ser empilhado como Tensor [B, C, H, W]
+                    out[key] = torch.stack([d[key] for d in batch])
+                else:
+                    out[key] = default_collate([d[key] for d in batch])
             except:
                 out[key] = [d[key] for d in batch]
         return out
