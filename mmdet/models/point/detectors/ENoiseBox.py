@@ -47,7 +47,13 @@ class ENoiseBox(TwoStageDetector):
                       gt_masks=None,
                       proposals=None,
                       **kwargs):
+        # x = self.extract_feat(img)
+        # Corrigir input de shape [1, 2, 3, H, W] para [2, 3, H, W]
+        #filipe code
+        if img.dim() == 5:
+            img = img.squeeze(0)  # Remove a dimensão extra
         x = self.extract_feat(img)
+        #end filipe code
         fine_proposal_cfg = self.train_cfg.get('fine_proposal', self.test_cfg.rpn)
         losses = dict()
         for stage in range(self.num_stages):

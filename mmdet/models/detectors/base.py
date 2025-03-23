@@ -239,6 +239,16 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
                 averaging the logs.
         """
         
+        #filipe code
+        img = data['img']
+        if isinstance(img, list):
+            print(f"img is list, len={len(img)}, shape={[i.shape for i in img]}")
+        elif isinstance(img, torch.Tensor):
+            print(f"img shape = {img.shape}")
+        else:
+            print(f"img type = {type(img)}")
+        #end
+
         losses = self(**data)
         loss, log_vars = self._parse_losses(losses)
 
