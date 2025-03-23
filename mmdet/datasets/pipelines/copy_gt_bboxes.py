@@ -6,7 +6,11 @@ class CopyGTBBoxesAsTrueBBoxes:
         # Copia gt_bboxes para gt_true_bboxes
         # results['gt_true_bboxes'] = results['gt_bboxes'].copy()
         # Acessa os dados dentro do DataContainer e copia
-        results['gt_true_bboxes'] = results['gt_bboxes'].data.copy()
+        gt_bboxes = results['gt_bboxes']
+        if hasattr(gt_bboxes, 'data'):
+            results['gt_true_bboxes'] = gt_bboxes.data.clone()
+        else:
+            results['gt_true_bboxes'] = gt_bboxes.clone()
         return results
 
     def __repr__(self):
