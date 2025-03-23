@@ -218,7 +218,7 @@ train_pipeline = [
     dict(type='DefaultFormatBundle'),
     # dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_bboxes_ignore', 'gt_true_bboxes']),
     # dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_bboxes_ignore']),
-    dict(type='CopyGTBBoxesAsTrueBBoxes'),
+    # dict(type='CopyGTBBoxesAsTrueBBoxes'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_true_bboxes'], 
          meta_keys=('filename', 'ori_shape', 'img_shape', 'scale_factor')),
 ]
