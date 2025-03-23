@@ -86,10 +86,9 @@ def custom_collate_fn(batch):
 
             if isinstance(values[0], DataContainer):
                 if key == 'img':
-                    # img → empilha os tensores internos
-                    output[key] = torch.stack([v.data for v in values], dim=0)
+                    # Usa o default_collate pra lidar com padding, etc
+                    output[key] = default_collate([v.data for v in values])
                 else:
-                    # outros campos → lista de DataContainer
                     output[key] = values
             else:
                 try:
