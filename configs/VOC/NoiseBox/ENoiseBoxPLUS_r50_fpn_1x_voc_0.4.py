@@ -251,7 +251,10 @@ data = dict(
     train=dict(
         type=dataset_type,
         ann_file=[
-            data_root + 'VOC2007/voc07_trainval.pkl',
+            # data_root + 'VOC2007/voc07_trainval.pkl',
+            # data_root + 'VOC2007/ImageSets/Main/trainval_debug_nano.txt',
+            data_root + '/home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/VOC2012/ImageSets/Main/trainval_debug_nano.txt',
+            # /home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/VOC2012/ImageSets/Main
         ],
         img_prefix=[data_root + 'VOC2007/',],
         pipeline=train_pipeline,
@@ -259,14 +262,45 @@ data = dict(
     ),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'VOC2007/voc07_test.pkl',
+        # ann_file=data_root + 'VOC2007/voc07_test.pkl',
+        # ann_file=data_root + 'VOC2007/ImageSets/Main/test.txt',
+        ann_file=data_root + '/home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/VOC2007/ImageSets/Main/test.txt',
         img_prefix=data_root + 'VOC2007/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'VOC2007/voc07_test.pkl',
+        # ann_file=data_root + 'VOC2007/voc07_test.pkl',
+        #ann_file=data_root + 'VOC2007/ImageSets/Main/test.txt',
+        ann_file=data_root + '/home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/VOC2007/ImageSets/Main/test.txt',
         img_prefix=data_root + 'VOC2007/',
         pipeline=test_pipeline))
+
+# ## filipe2
+# data = dict(
+#     samples_per_gpu=2,
+#     workers_per_gpu=2,
+#     train=dict(
+#         type=dataset_type,
+#         ann_file=[
+#             #data_root + 'VOC2007/ImageSets/Main/trainval.txt',
+#             data_root + 'VOC2007/ImageSets/Main/trainval_debug_nano.txt',
+#             # data_root + 'VOC2012/ImageSets/Main/trainval.txt'
+#         ],
+#         #img_prefix=[data_root + 'VOC2007/', data_root + 'VOC2012/'],
+#         img_prefix=[data_root + 'VOC2007/'],
+#         pipeline=train_pipeline),
+#     val=dict(
+#         type=dataset_type,
+#         ann_file=data_root + 'VOC2007/ImageSets/Main/test.txt',
+#         img_prefix=data_root + 'VOC2007/',
+#         pipeline=test_pipeline),
+#     test=dict(
+#         type=dataset_type,
+#         ann_file=data_root + 'VOC2007/ImageSets/Main/test.txt',
+#         img_prefix=data_root + 'VOC2007/',
+#         pipeline=test_pipeline))
+# ##end
+
 evaluation = dict(interval=3, metric='mAP')
 
 check = dict(stop_while_nan=False)  # add by hui
