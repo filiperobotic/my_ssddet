@@ -259,7 +259,7 @@ data = dict(
         ],
         img_prefix=[data_root + 'VOC2007/',],
         pipeline=train_pipeline,
-        box_noise_level=0.4,
+        # box_noise_level=0.4,
     ),
     val=dict(
         type=dataset_type,
