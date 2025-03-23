@@ -83,7 +83,8 @@ def train_detector(model,
             find_unused_parameters=find_unused_parameters)
     else:
         model = MMDataParallel(
-            model.cuda(cfg.gpu_ids[0]), device_ids=cfg.gpu_ids)
+            #model.cuda(cfg.gpu_ids[0]), device_ids=cfg.gpu_ids)
+            model.to('cpu'), device_ids=[])  #rodar na cpu
 
     # build runner
     optimizer = build_optimizer(model, cfg.optimizer)
