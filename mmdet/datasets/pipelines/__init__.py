@@ -14,6 +14,7 @@ from .transforms import (Albu, CutOut, Expand, MinIoURandomCrop, Normalize,
                          SegRescale)
 from .rtest_time_aug import CroppedTilesFlipAug  # add by hui
 from .scale_match import ScaleMatchResize  # add by hui
+from .copy_gt_bboxes import CopyGTBBoxesAsTrueBBoxes # added by FILIPE
 
 __all__ = [
     'Compose', 'to_tensor', 'ToTensor', 'ImageToTensor', 'ToDataContainer',
