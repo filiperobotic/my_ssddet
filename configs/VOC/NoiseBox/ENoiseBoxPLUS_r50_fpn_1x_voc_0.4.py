@@ -199,7 +199,8 @@ model = dict(
 # dataset settings
 # dataset_type = 'OAMILVOCDataset'
 dataset_type = 'VOCDataset'
-data_root = './data/'
+#data_root = './data/'
+data_root = '/home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -254,9 +255,10 @@ data = dict(
         ann_file=[
             # data_root + 'VOC2007/voc07_trainval.pkl',
             # data_root + 'VOC2007/ImageSets/Main/trainval_debug_nano.txt',
-            data_root + '/home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/VOC2012/ImageSets/Main/trainval_debug_nano.txt',
+            data_root +'/home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/VOC2012/ImageSets/Main/trainval_debug_nano.txt',
             # /home/pesquisador/pesquisa/filipe/2_mmdetection/data/VOCdevkit/VOC2012/ImageSets/Main
         ],
+        #img_prefix=[data_root + 'VOC2007/',],
         img_prefix=[data_root + 'VOC2007/',],
         pipeline=train_pipeline,
         # box_noise_level=0.4,
