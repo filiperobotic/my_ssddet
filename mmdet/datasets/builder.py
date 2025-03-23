@@ -78,15 +78,16 @@ def custom_collate_fn(batch):
     import torch
     from torch.utils.data._utils.collate import default_collate
 
-    elem = batch[0]
-    if isinstance(elem, dict):
-        out = {}
-        for key in elem:
-            try:
-                out[key] = default_collate([d[key] for d in batch])
-            except Exception:
-                out[key] = [d[key] for d in batch]
-        return out
+    if isinstance(batch[0], dict):
+        output = {}
+        for key in batch[0]:
+            values = [d[key] for d in batch]
+            # Somente o campo 'img' precisa ser empilhado
+            if key == 'img':
+                output[key] = torch.stack(values, dim=0)  # [B, C, H, W]
+            else:
+                output[key] = values  # Deixa o resto como lista
+        return output
     else:
         return default_collate(batch)
 
